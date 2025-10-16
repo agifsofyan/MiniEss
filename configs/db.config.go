@@ -11,7 +11,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var JwtSecret = []byte("replace-with-secure-secret")
+var JwtSecret = []byte(GetEnv("SECRET_KEY"))
 
 type TokenClaim struct {
 	Sub  float64 `json:"sub"` // jwt lib may unmarshal numeric as float64

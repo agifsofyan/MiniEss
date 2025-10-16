@@ -1,0 +1,30 @@
+-- `mini-ess`.employees definition
+
+CREATE TABLE `employees` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `employee_code` varchar(50) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+  `gender` enum('male','female','other') DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `hire_date` date NOT NULL,
+  `employment_status` enum('permanent','contract','intern') DEFAULT 'permanent',
+  `timezone` varchar(64) DEFAULT 'Asia/Jakarta',
+  `department_id` bigint DEFAULT NULL,
+  `position_id` bigint DEFAULT NULL,
+  `photo_url` varchar(512) DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `employee_code` (`employee_code`),
+  UNIQUE KEY `email` (`email`),
+  KEY `department_id` (`department_id`),
+  KEY `position_id` (`position_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`),
+  CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`),
+  CONSTRAINT `employees_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
